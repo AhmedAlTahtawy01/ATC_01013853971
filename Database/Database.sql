@@ -1,0 +1,65 @@
+-- Create database
+CREATE DATABASE IF NOT EXISTS event_booking_db;
+USE event_booking_db;
+
+-- Roles Table
+CREATE TABLE Roles (
+    Id INT AUTO_INCREMENT PRIMARY KEY,
+    Name VARCHAR(20) NOT NULL UNIQUE
+);
+
+-- Users Table
+CREATE TABLE Users (
+    Id INT AUTO_INCREMENT PRIMARY KEY,
+    Username VARCHAR(50) NOT NULL UNIQUE,
+    Email VARCHAR(100),
+    PasswordHash TEXT NOT NULL,
+    RoleId INT NOT NULL,
+    FOREIGN KEY (RoleId) REFERENCES Roles(Id)
+        ON DELETE RESTRICT ON UPDATE CASCADE
+);
+
+-- Events Table
+CREATE TABLE Events (
+    Id INT AUTO_INCREMENT PRIMARY KEY,
+    Name VARCHAR(100) NOT NULL,
+    Description TEXT,
+    Category VARCHAR(50),
+    Venue VARCHAR(100),
+    Date DATETIME NOT NULL,
+    Price DECIMAL(10,2) DEFAULT 0.00,
+    ImageUrl TEXT,
+    CreatedBy INT NOT NULL,
+    FOREIGN KEY (CreatedBy) REFERENCES Users(Id)
+        ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+-- Bookings Table
+CREATE TABLE Bookings (
+    Id INT AUTO_INCREMENT PRIMARY KEY,
+    UserId INT NOT NULL,
+    EventId INT NOT NULL,
+    BookedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE KEY unique_booking (UserId, EventId),
+    FOREIGN KEY (UserId) REFERENCES Users(Id)
+        ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (EventId) REFERENCES Events(Id)
+        ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+-- Tags Table (optional)
+CREATE TABLE Tags (
+    Id INT AUTO_INCREMENT PRIMARY KEY,
+    Name VARCHAR(30) NOT NULL UNIQUE
+);
+
+-- EventTags Table (optional many-to-many)
+CREATE TABLE EventTags (
+    EventId INT NOT NULL,
+    TagId INT NOT NULL,
+    PRIMARY KEY (EventId, TagId),
+    FOREIGN KEY (EventId) REFERENCES Events(Id)
+        ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (TagId) REFERENCES Tags(Id)
+        ON DELETE CASCADE ON UPDATE CASCADE
+);
