@@ -1,19 +1,27 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace ATC.DataAccess.Models
 {
     public class User
     {
         public int Id { get; set; }
-        public string Username { get; set; }
-        public string PasswordHash { get; set; }
-        public string Role { get; set; }
 
-        public User(int id, string username, string passwordHash, string role)
-        {
-            Id = id;
-            Username = username;
-            PasswordHash = passwordHash;
-            Role = role;
-        }
+        [Required]
+        [StringLength(50)]
+        public required string Username { get; set; }
+
+        [Required]
+        [StringLength(100)]
+        public required string Name { get; set; }
         
+        [Required]
+        [EmailAddress]
+        public required string Email { get; set; }
+
+        [Required]
+        public required string PasswordHash { get; set; }
+
+        [Required]
+        public int RoleId { get; set; }
     }
 }
