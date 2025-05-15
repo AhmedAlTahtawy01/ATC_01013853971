@@ -19,6 +19,7 @@ namespace ATC.DataAccess.Models
         public required string Email { get; set; }
 
         [Required]
+        [MinLength(8)]
         public required string PasswordHash { get; set; }
 
         [Required]
