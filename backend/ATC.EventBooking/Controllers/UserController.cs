@@ -3,7 +3,6 @@ using ATC.BusinessLogic.Services;
 using ATC.DataAccess.Models;
 using ATC.EventBooking.RequestModels;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.Extensions.Logging;
 
 [Route("api/[controller]")]
@@ -131,6 +130,12 @@ public class UserController : ControllerBase
         {
             _logger.LogError("Invalid user data");
             return BadRequest(ModelState);
+        }
+
+        if (userId <= 0)
+        {
+            _logger.LogError("Invalid user ID: {UserId}", userId);
+            return BadRequest(new { message = "Invalid user ID" });
         }
 
         if (user.Id != userId)

@@ -21,9 +21,19 @@ builder.Services.AddSwaggerGen(options =>
 });
 
 // Register dependencies (DI)
+
+// Connection Settings
 builder.Services.AddScoped<ConnectionSettings>();
+
+// User Repo
 builder.Services.AddScoped<UserRepo>();
+// User Service
 builder.Services.AddScoped<UserService>();
+
+// Role Repo
+builder.Services.AddScoped<RoleRepo>();
+// Role Service
+builder.Services.AddScoped<RoleService>();
 
 // // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 // builder.Services.AddOpenApi();

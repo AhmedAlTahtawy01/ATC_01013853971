@@ -16,15 +16,47 @@ namespace ATC.BusinessLogic.Services
             _logger = logger;
         }
         
+        // Validate user before creating or updating (Helper method)
+        private void ValidateUser(User user)
+        {
+            if (user == null)
+            {
+                _logger.LogError("User cannot be null");
+                throw new ArgumentNullException(nameof(user));
+            }
+
+            if (string.IsNullOrEmpty(user.Username))
+            {
+                _logger.LogError("Username cannot be null or empty");
+                throw new ArgumentException("Username cannot be null or empty");
+            }
+
+            if (string.IsNullOrEmpty(user.Email))
+            {
+                _logger.LogError("Email cannot be null or empty");
+                throw new ArgumentException("Email cannot be null or empty");
+            }
+            
+            if (string.IsNullOrEmpty(user.PasswordHash))
+            {
+                _logger.LogError("Password cannot be null or empty");
+                throw new ArgumentException("Password cannot be null or empty");
+            }
+        }
+        
+        // Hash the password
         private string HashPassword(string plainPassword) =>
          BCrypt.Net.BCrypt.HashPassword(plainPassword);
 
+        // Verify the password
         private bool VerifyPassword(string hashedPassword, string plainPassword) =>
          BCrypt.Net.BCrypt.Verify(plainPassword, hashedPassword);
 
         // Register a new user
         public async Task<bool> CreateUserAsync(User user)
         {
+            ValidateUser(user);
+
             try
             {
                 _logger.LogInformation("Starting user registration for: {Username}", user.Username);
@@ -114,7 +146,16 @@ namespace ATC.BusinessLogic.Services
                 throw new ArgumentException("Page number and page size must be greater than 0");
             }
 
-            return await _userRepo.GetAllUsersAsync(pageNumber, pageSize);
+            try
+            {
+                _logger.LogInformation("Retrieving all users with pagination");
+                return await _userRepo.GetAllUsersAsync(pageNumber, pageSize);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error occurred while retrieving all users with pagination");
+                throw;
+            }
         }
         
         // Get user by ID
@@ -126,7 +167,16 @@ namespace ATC.BusinessLogic.Services
                 throw new ArgumentException("User ID must be greater than 0");
             }
 
-            return await _userRepo.GetByIdAsync(userId);
+            try
+            {
+                _logger.LogInformation("Retrieving user by ID: {UserId}", userId);
+                return await _userRepo.GetByIdAsync(userId);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error occurred while retrieving user by ID: {UserId}", userId);
+                throw;
+            }
         }
 
         // Get user by username
@@ -138,9 +188,18 @@ namespace ATC.BusinessLogic.Services
                 throw new ArgumentException("Username is required");
             }
 
-            return await _userRepo.GetByUsernameAsync(username);
+            try
+            {
+                _logger.LogInformation("Retrieving user by username: {Username}", username);
+                return await _userRepo.GetByUsernameAsync(username);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error occurred while retrieving user by username: {Username}", username);
+                throw;
+            }
         }
-        
+
         // Get user by email
         public async Task<User?> GetByEmailAsync(string email)
         {
@@ -150,23 +209,28 @@ namespace ATC.BusinessLogic.Services
                 throw new ArgumentException("Email is required");
             }
 
-            return await _userRepo.GetByEmailAsync(email);
+            try
+            {
+                _logger.LogInformation("Retrieving user by email: {Email}", email);
+                return await _userRepo.GetByEmailAsync(email);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error occurred while retrieving user by email: {Email}", email);
+                throw;
+            }
         }
         
         // Update user
         public async Task<bool> UpdateUserAsync(User user)
         {
-            if (user == null)
-            {
-                _logger.LogError("User cannot be null");
-                throw new ArgumentNullException(nameof(user));
-            }
-
             if (user.Id <= 0)
             {
                 _logger.LogError("Invalid user ID: {UserId}", user.Id);
                 throw new ArgumentException("User ID must be greater than 0");
             }
+
+            ValidateUser(user);
 
             var existingUser = await _userRepo.GetByIdAsync(user.Id);
             if (existingUser == null)
@@ -181,7 +245,16 @@ namespace ATC.BusinessLogic.Services
                 user.PasswordHash = HashPassword(user.PasswordHash);
             }
 
-            return await _userRepo.UpdateUserAsync(user);
+            try
+            {
+                _logger.LogInformation("Updating user: {UserId}", user.Id);
+                return await _userRepo.UpdateUserAsync(user);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error occurred while updating user: {UserId}", user.Id);
+                throw;
+            }
         }
 
         // Change user role (For admins only)
@@ -193,7 +266,16 @@ namespace ATC.BusinessLogic.Services
                 throw new ArgumentException("User ID and new role ID must be greater than 0");
             }
 
-            return await _userRepo.ChangeUserRoleAsync(userId, newRoleId);
+            try
+            {
+                _logger.LogInformation("Changing user role for: {UserId} to {NewRoleId}", userId, newRoleId);
+                return await _userRepo.ChangeUserRoleAsync(userId, newRoleId);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error occurred while changing user role: {UserId} to {NewRoleId}", userId, newRoleId);
+                throw;
+            }
         }
         
         // Delete user
@@ -205,7 +287,16 @@ namespace ATC.BusinessLogic.Services
                 throw new ArgumentException("User ID must be greater than 0");
             }
 
-            return await _userRepo.DeleteUserAsync(userId);
+            try
+            {
+                _logger.LogInformation("Deleting user by ID: {UserId}", userId);
+                return await _userRepo.DeleteUserAsync(userId);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error occurred while deleting user: {UserId}", userId);
+                throw;
+            }
         }
     }
 }

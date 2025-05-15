@@ -182,6 +182,7 @@ namespace ATC.DataAccess.Repositories
             return await GetByColumnAsync("Email", email);
         }
 
+        // Update user (Update user name and password only)
         public async Task<bool> UpdateUserAsync(User user)
         {
             const string query = @"
@@ -272,6 +273,7 @@ namespace ATC.DataAccess.Repositories
             }
         }
 
+        // Delete user
         public async Task<bool> DeleteUserAsync(int userId)
         {
             const string query = "DELETE FROM Users WHERE Id = @UserId";
@@ -279,7 +281,7 @@ namespace ATC.DataAccess.Repositories
 
             try
             {
-                _logger.LogInformation("Deleting user: {UserId}", userId);
+                _logger.LogInformation("Deleting user by ID: {UserId}", userId);
 
                 int rowsAffected = await _db.ExecuteQueryAsync(query, async cmd =>
                 {
@@ -308,6 +310,7 @@ namespace ATC.DataAccess.Repositories
             }
         }
 
+        // Validate user credentials
         public async Task<User?> ValidateCredentialsAsync(string username, string passwordHash)
         {
             try
@@ -343,7 +346,7 @@ namespace ATC.DataAccess.Repositories
             }
         }
 
-        // Map user from database reader
+        // Map user from database reader (Helper method)
         private User MapUser(DbDataReader reader)
         {
             var idOrdinal = reader.GetOrdinal("Id");
