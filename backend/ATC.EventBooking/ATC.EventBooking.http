@@ -1,6 +1,0 @@
-@ATC.EventBooking_HostAddress = http://localhost:5041
-
-GET {{ATC.EventBooking_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
