@@ -5,6 +5,8 @@ A full-stack web application for managing and booking events. This project consi
 ## Live Demo
 
 - Frontend: [Event Booking System](https://ahmedhamdy-areeb-eventbooking.netlify.app/public/login.html)
+- Admin username: ahmedhamdy123, password: Ahmed1234
+- Normal User username: ahmedhamdy13, password: Ahmed1234
 - Backend API: [API Documentation](https://ahmedhamdy-areeb-api.runasp.net/index.html)
 
 ## Project Structure
