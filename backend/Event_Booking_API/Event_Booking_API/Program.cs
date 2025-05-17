@@ -51,6 +51,11 @@ builder.Services.AddScoped<BookingRepo>();
 // Booking Service
 builder.Services.AddScoped<BookingService>();
 
+// Tag Repo
+builder.Services.AddScoped<TagRepo>();
+// Tag Service
+builder.Services.AddScoped<TagService>();
+
 // Register controllers with different namespace
 builder.Services.AddControllers()
     .AddApplicationPart(typeof(Program).Assembly);
