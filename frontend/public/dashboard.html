@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - ATC System</title>
+    <link rel="stylesheet" href="../src/css/dashboard.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <nav class="sidebar">
+            <div class="logo">
+                <h2>ATC System</h2>
+            </div>
+            <ul class="nav-links">
+                <li class="active">
+                    <a href="#"><span class="icon">🏠</span> Dashboard</a>
+                </li>
+                <li>
+                    <a href="#"><span class="icon">📅</span> Events</a>
+                </li>
+                <li>
+                    <a href="#"><span class="icon">👥</span> Users</a>
+                </li>
+                <li>
+                    <a href="#"><span class="icon">⚙️</span> Settings</a>
+                </li>
+            </ul>
+            <div class="user-info">
+                <div class="user-details">
+                    <span class="user-name" id="userName">Loading...</span>
+                    <span class="user-role" id="userRole">Loading...</span>
+                </div>
+                <button id="logoutBtn" class="logout-btn">Logout</button>
+            </div>
+        </nav>
+
+        <main class="main-content">
+            <header class="top-bar">
+                <h1>Welcome to Dashboard</h1>
+                <div class="date-time" id="dateTime">Loading...</div>
+            </header>
+
+            <div class="dashboard-content">
+                <div class="stats-container">
+                    <div class="stat-card">
+                        <h3>Total Events</h3>
+                        <p class="stat-number">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Active Users</h3>
+                        <p class="stat-number">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Upcoming Events</h3>
+                        <p class="stat-number">0</p>
+                    </div>
+                </div>
+
+                <div class="recent-activity">
+                    <h2>Recent Activity</h2>
+                    <div class="activity-list">
+                        <p class="no-activity">No recent activity to display</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="../src/js/dashboard.js"></script>
+</body>
+</html> 
