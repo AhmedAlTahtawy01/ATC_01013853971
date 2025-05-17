@@ -97,7 +97,8 @@ namespace EventBooking.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error logging in: {Username}", request.Username);
-                return StatusCode(500, new { message = "Internal server error" });
+                return StatusCode(500, new { message = "Exception thrown", error = ex.Message });
+
             }
         }
 

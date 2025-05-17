@@ -17,7 +17,9 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend", policy =>
     {
-        policy.WithOrigins("http://127.0.0.1:5500", "http://127.0.0.1:5501")
+        policy.WithOrigins("http://127.0.0.1:5500",
+            "http://127.0.0.1:5501", "https://localhost:7107",
+            "https://ahmedhamdy-areeb-eventbooking.netlify.app")
               .AllowAnyMethod()
               .AllowAnyHeader()
               .AllowCredentials();
