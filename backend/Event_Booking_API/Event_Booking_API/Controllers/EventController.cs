@@ -324,6 +324,7 @@ namespace EventBooking.Controllers
             }
         }
 
+        [Authorize(Roles = "1")]
         [HttpPut("{eventId}")]
         public async Task<IActionResult> UpdateEvent([FromRoute] int eventId, [FromBody] Event eventData)
         {
@@ -375,6 +376,7 @@ namespace EventBooking.Controllers
             }
         }
 
+        [Authorize(Roles = "1")]
         [HttpDelete("{eventId}")]
         public async Task<IActionResult> DeleteEvent([FromRoute] int eventId)
         {

@@ -19,7 +19,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const bookingDetailsModal = document.getElementById('bookingDetailsModal');
     const closeBtn = bookingDetailsModal.querySelector('.close');
     const cancelBtn = bookingDetailsModal.querySelector('.cancel-btn');
-    const cancelBookingBtn = document.getElementById('cancelBookingBtn');
 
     // Close modal
     function closeModal() {
@@ -204,40 +203,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('modalStatus').textContent = 'Booked';
         document.getElementById('modalPrice').textContent = `Booking ID: ${bookingData.id}`;
 
-        // Show/hide cancel button based on booking status
-        const cancelBookingBtn = document.getElementById('cancelBookingBtn');
-        cancelBookingBtn.style.display = 'block'; // Always show cancel button
-        cancelBookingBtn.onclick = () => cancelBooking(bookingData.id);
-
         bookingDetailsModal.style.display = "block";
-    }
-
-    // Function to cancel booking
-    async function cancelBooking(bookingId) {
-        if (!confirm('Are you sure you want to cancel this booking?')) {
-            return;
-        }
-
-        try {
-            const response = await fetch(`https://ahmedhamdy-areeb-api.runasp.net/api/booking/${bookingId}/cancel`, {
-                method: 'PUT',
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Accept': 'application/json'
-                }
-            });
-
-            if (!response.ok) {
-                throw new Error('Failed to cancel booking');
-            }
-
-            alert('Booking cancelled successfully');
-            closeModal();
-            loadBookings(); // Reload the bookings list
-        } catch (error) {
-            console.error('Error cancelling booking:', error);
-            alert('Failed to cancel booking. Please try again.');
-        }
     }
 
     // Handle logout
