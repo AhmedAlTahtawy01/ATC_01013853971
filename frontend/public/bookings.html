@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Users - ATC System</title>
+    <title>Bookings - Event Booking System</title>
     <link rel="stylesheet" href="../src/css/dashboard.css">
-    <link rel="stylesheet" href="../src/css/users.css">
+    <link rel="stylesheet" href="bookings.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
@@ -27,13 +27,13 @@
                         <span>Events</span>
                     </a>
                 </li>
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a href="users.html" class="nav-link">
                         <i class="fas fa-users"></i>
                         <span>Users</span>
                     </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item active">
                     <a href="bookings.html" class="nav-link">
                         <i class="fas fa-ticket-alt"></i>
                         <span>Bookings</span>
@@ -51,69 +51,62 @@
 
         <main class="main-content">
             <header class="top-bar">
-                <h1>Users Management</h1>
+                <h1>Bookings Management</h1>
                 <div class="date-time" id="dateTime">Loading...</div>
             </header>
 
-            <div class="users-container">
-                <div class="users-header">
-                    <h2>All Users</h2>
-                    <button id="addUserBtn" class="add-user-btn">
-                        <i class="fas fa-plus"></i> Add New User
-                    </button>
+            <div class="bookings-container">
+                <div class="bookings-header">
+                    <h2>All Bookings</h2>
                 </div>
 
-                <div class="users-grid" id="usersTableBody">
-                    <!-- User cards will be dynamically added here -->
+                <div class="bookings-grid" id="bookingsTableBody">
+                    <!-- Bookings will be populated here as cards -->
                 </div>
 
                 <div class="pagination" id="pagination">
-                    <!-- Pagination buttons will be dynamically added here -->
+                    <!-- Pagination will be added here -->
                 </div>
             </div>
         </main>
     </div>
 
-    <!-- Add User Modal -->
-    <div id="addUserModal" class="modal">
+    <!-- Booking Details Modal -->
+    <div id="bookingDetailsModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>Add New User</h2>
+                <h2>Booking Details</h2>
                 <span class="close">&times;</span>
             </div>
-            <form id="addUserForm">
-                <div class="form-group">
-                    <label for="username">Username</label>
-                    <input type="text" id="username" required maxlength="50">
+            <div class="booking-details">
+                <div class="detail-group">
+                    <label>Event ID:</label>
+                    <span id="modalEventName"></span>
                 </div>
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" id="name" required maxlength="100">
+                <div class="detail-group">
+                    <label>User ID:</label>
+                    <span id="modalUserName"></span>
                 </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" required>
+                <div class="detail-group">
+                    <label>Booked At:</label>
+                    <span id="modalBookingDate"></span>
                 </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" required minlength="8">
+                <div class="detail-group">
+                    <label>Status:</label>
+                    <span id="modalStatus"></span>
                 </div>
-                <div class="form-group">
-                    <label for="roleId">Role</label>
-                    <select id="roleId" required>
-                        <option value="">Select a role</option>
-                        <option value="1">Admin</option>
-                        <option value="2">User</option>
-                    </select>
+                <div class="detail-group">
+                    <label>Booking ID:</label>
+                    <span id="modalPrice"></span>
                 </div>
-                <div class="form-actions">
-                    <button type="button" class="cancel-btn">Cancel</button>
-                    <button type="submit" class="submit-btn">Add User</button>
-                </div>
-            </form>
+            </div>
+            <div class="modal-actions">
+                <button type="button" class="cancel-btn">Close</button>
+                <button type="button" id="cancelBookingBtn" class="cancel-booking-btn">Cancel Booking</button>
+            </div>
         </div>
     </div>
 
-    <script src="../src/js/users.js"></script>
+    <script src="../src/js/bookings.js"></script>
 </body>
 </html> 

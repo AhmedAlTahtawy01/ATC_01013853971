@@ -1,10 +1,10 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Check if user is logged in
     const token = localStorage.getItem('token');
-    const user = JSON.parse(localStorage.getItem('user'));
+    const userData = JSON.parse(localStorage.getItem('userData'));
 
-    if (!token || !user) {
-        window.location.href = 'http://127.0.0.1:5500/frontend/public/login.html';
+    if (!token || !userData) {
+        window.location.href = 'login.html';
         return;
     }
 
@@ -12,8 +12,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const userNameElement = document.getElementById('userName');
     const userRoleElement = document.getElementById('userRole');
     
-    userNameElement.textContent = user.username || 'User';
-    userRoleElement.textContent = user.roleId === 1 ? 'Admin' : 'User';
+    userNameElement.textContent = userData.username || 'User';
+    userRoleElement.textContent = userData.roleId === 1 ? 'Admin' : 'User';
 
     // Modal elements
     const addModal = document.getElementById('addUserModal');
@@ -280,8 +280,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // Handle logout
     document.getElementById('logoutBtn').addEventListener('click', function() {
         localStorage.removeItem('token');
-        localStorage.removeItem('user');
-        window.location.href = 'http://127.0.0.1:5500/frontend/public/login.html';
+        localStorage.removeItem('userData');
+        window.location.href = 'login.html';
     });
 
     // Update date and time

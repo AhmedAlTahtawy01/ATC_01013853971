@@ -20,7 +20,7 @@ const auth = {
     // Check if user is admin
     isAdmin: () => {
         const userData = JSON.parse(localStorage.getItem('userData'));
-        return userData?.roleId === 1;
+        return userData?.roleId == 1;
     },
 
     // Handle logout
