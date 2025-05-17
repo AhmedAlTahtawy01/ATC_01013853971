@@ -46,6 +46,11 @@ builder.Services.AddScoped<EventRepo>();
 // Event Service
 builder.Services.AddScoped<EventService>();
 
+// Booking Repo
+builder.Services.AddScoped<BookingRepo>();
+// Booking Service
+builder.Services.AddScoped<BookingService>();
+
 // Register controllers with different namespace
 builder.Services.AddControllers()
     .AddApplicationPart(typeof(Program).Assembly);
