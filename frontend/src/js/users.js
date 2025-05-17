@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Function to fetch users
     async function fetchUsers(page = 1) {
         try {
-            const response = await fetch(`https://localhost:7107/api/user?pageNumber=${page}&pageSize=${pageSize}`, {
+            const response = await fetch(`https://ahmedhamdy-areeb-api.runasp.net/api/user?pageNumber=${page}&pageSize=${pageSize}`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -220,7 +220,7 @@ document.addEventListener('DOMContentLoaded', function() {
             };
 
         try {
-            const response = await fetch('https://localhost:7107/api/user/register', {
+            const response = await fetch('https://ahmedhamdy-areeb-api.runasp.net/api/user/register', {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -251,7 +251,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         try {
-            const response = await fetch(`https://localhost:7107/api/user/${userId}`, {
+            const response = await fetch(`https://ahmedhamdy-areeb-api.runasp.net/api/user/${userId}`, {
                 method: 'DELETE',
                 headers: {
                     'Authorization': `Bearer ${token}`,

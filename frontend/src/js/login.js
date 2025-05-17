@@ -5,36 +5,14 @@ document.addEventListener('DOMContentLoaded', function() {
     const usernameError = document.getElementById('username-error');
     const passwordError = document.getElementById('password-error');
 
-    // Function to show error message
-    function showError(element, message) {
-        if (element) {
-            element.textContent = message;
-            element.classList.add('show');
-            if (element.previousElementSibling) {
-                element.previousElementSibling.classList.add('error');
-            }
-        }
-    }
-
-    // Function to hide error message
-    function hideError(element) {
-        if (element) {
-            element.textContent = '';
-            element.classList.remove('show');
-            if (element.previousElementSibling) {
-                element.previousElementSibling.classList.remove('error');
-            }
-        }
-    }
-
     // Function to validate username
     function validateUsername() {
         const username = usernameInput.value.trim();
         if (!username) {
-            showError(usernameError, 'Username is required');
+            utils.uiUtils.showError(usernameError, 'Username is required');
             return false;
         }
-        hideError(usernameError);
+        utils.uiUtils.hideError(usernameError);
         return true;
     }
 
@@ -42,22 +20,22 @@ document.addEventListener('DOMContentLoaded', function() {
     function validatePassword() {
         const password = passwordInput.value.trim();
         if (!password) {
-            showError(passwordError, 'Password is required');
+            utils.uiUtils.showError(passwordError, 'Password is required');
             return false;
         }
         if (password.length < 8) {
-            showError(passwordError, 'Password must be at least 8 characters long');
+            utils.uiUtils.showError(passwordError, 'Password must be at least 8 characters long');
             return false;
         }
-        hideError(passwordError);
+        utils.uiUtils.hideError(passwordError);
         return true;
     }
 
     // Function to validate all fields
     function validateAll() {
         // Hide all errors first
-        hideError(usernameError);
-        hideError(passwordError);
+        utils.uiUtils.hideError(usernameError);
+        utils.uiUtils.hideError(passwordError);
 
         // Validate all fields
         const isUsernameValid = validateUsername();
@@ -69,41 +47,38 @@ document.addEventListener('DOMContentLoaded', function() {
     // Function to handle login API call
     async function handleLogin(username, password) {
         try {
-            const response = await fetch('https://localhost:7107/api/user/login', {
+            const data = await utils.api.fetch(utils.api.endpoints.login, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
                 body: JSON.stringify({
                     username: username,
                     password: password
                 })
             });
-
-            if (!response.ok) {
-                const errorData = await response.json().catch(() => ({ message: 'Login failed' }));
-                throw new Error(errorData.message || 'Login failed');
-            }
-
-            const data = await response.json();
             
             if (!data.token) {
                 throw new Error('Invalid response from server');
             }
 
-            // Store the token in localStorage
+            // Store the token and user data in localStorage
             localStorage.setItem('token', data.token);
-            localStorage.setItem('user', JSON.stringify(data.user));
+            localStorage.setItem('userData', JSON.stringify(data.user));
 
-            // Redirect to dashboard or home page
-            window.location.href = 'http://127.0.0.1:5500/frontend/public/dashboard.html';
+            // Redirect based on user role
+            if (data.user.roleId === 1) {
+                // Admin user - redirect to dashboard
+                window.location.href = 'dashboard.html';
+            } else if (data.user.roleId === 2) {
+                // Normal user - redirect to user home
+                window.location.href = 'user-home.html';
+            } else {
+                throw new Error('Invalid user role');
+            }
         } catch (error) {
             console.error('Login error:', error);
             if (error.message.includes('Failed to fetch')) {
-                showError(usernameError, 'Unable to connect to the server. Please try again later.');
+                utils.uiUtils.showError(usernameError, 'Unable to connect to the server. Please try again later.');
             } else {
-                showError(usernameError, error.message || 'Invalid username or password');
+                utils.uiUtils.showError(usernameError, error.message || 'Invalid username or password');
             }
         }
     }

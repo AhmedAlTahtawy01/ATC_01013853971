@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function() {
         };
 
         try {
-            const response = await fetch('https://localhost:7107/api/event', {
+            const response = await fetch('https://ahmedhamdy-areeb-api.runasp.net/api/event', {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -128,7 +128,7 @@ document.addEventListener('DOMContentLoaded', function() {
         };
 
         try {
-            const response = await fetch(`https://localhost:7107/api/event/${eventId}`, {
+            const response = await fetch(`https://ahmedhamdy-areeb-api.runasp.net/api/event/${eventId}`, {
                 method: 'PUT',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -200,7 +200,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Function to fetch events
     async function fetchEvents(page = 1) {
         try {
-            const response = await fetch(`https://localhost:7107/api/event?pageNumber=${page}&pageSize=${pageSize}`, {
+            const response = await fetch(`https://ahmedhamdy-areeb-api.runasp.net/api/event?pageNumber=${page}&pageSize=${pageSize}`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -223,7 +223,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Function to fetch single event
     async function fetchEvent(eventId) {
         try {
-            const response = await fetch(`https://localhost:7107/api/event/${eventId}`, {
+            const response = await fetch(`https://ahmedhamdy-areeb-api.runasp.net/api/event/${eventId}`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -339,7 +339,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         try {
-            const response = await fetch(`https://localhost:7107/api/event/${eventId}`, {
+            const response = await fetch(`https://ahmedhamdy-areeb-api.runasp.net/api/event/${eventId}`, {
                 method: 'DELETE',
                 headers: {
                     'Authorization': `Bearer ${token}`,

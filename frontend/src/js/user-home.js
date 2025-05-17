@@ -1,100 +1,86 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', () => {
     // Check if user is logged in
-    const token = localStorage.getItem('token');
-    const user = JSON.parse(localStorage.getItem('user'));
-
-    if (!token || !user) {
-        window.location.href = 'login.html';
-        return;
-    }
+    if (!utils.auth.requireAuth()) return;
 
     // Update user information
     const userNameElement = document.getElementById('userName');
-    userNameElement.textContent = user.username || 'User';
-
-    // Handle logout
-    document.getElementById('logoutBtn').addEventListener('click', function() {
-        localStorage.removeItem('token');
-        localStorage.removeItem('user');
-        window.location.href = 'login.html';
-    });
-
-    // Function to fetch featured events
-    async function fetchFeaturedEvents() {
-        try {
-            const response = await fetch('https://localhost:7107/api/event?pageNumber=1&pageSize=3', {
-                method: 'GET',
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Accept': 'application/json'
-                }
-            });
-
-            if (!response.ok) {
-                throw new Error('Failed to fetch events');
-            }
-
-            const data = await response.json();
-            return data.events;
-        } catch (error) {
-            console.error('Error fetching featured events:', error);
-            return [];
-        }
+    if (userNameElement) {
+        userNameElement.textContent = utils.auth.getCurrentUser().username;
     }
 
-    // Function to format date
-    function formatDate(dateString) {
-        const options = { 
-            year: 'numeric', 
-            month: 'long', 
-            day: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit'
-        };
-        return new Date(dateString).toLocaleDateString('en-US', options);
-    }
-
-    // Function to render featured events
-    function renderFeaturedEvents(events) {
-        const eventsContainer = document.getElementById('featuredEvents');
-        eventsContainer.innerHTML = '';
-
-        events.forEach(event => {
-            const eventCard = document.createElement('div');
-            eventCard.className = 'event-card';
-            eventCard.innerHTML = `
-                <div class="event-image">
-                    <img src="${event.imageUrl || '../images/default-event.jpg'}" alt="${event.name}">
-                </div>
-                <div class="event-details">
-                    <h4>${event.name}</h4>
-                    <p class="event-date">
-                        <i class="fas fa-calendar"></i>
-                        ${formatDate(event.dateTime)}
-                    </p>
-                    <p class="event-venue">
-                        <i class="fas fa-map-marker-alt"></i>
-                        ${event.venue}
-                    </p>
-                    <p class="event-price">
-                        <i class="fas fa-ticket-alt"></i>
-                        $${event.price}
-                    </p>
-                    <button onclick="window.location.href='event-details.html?id=${event.id}'">
-                        View Details
-                    </button>
-                </div>
-            `;
-            eventsContainer.appendChild(eventCard);
-        });
+    // Initialize logout button
+    const logoutBtn = document.getElementById('logoutBtn');
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', utils.auth.logout);
     }
 
     // Load featured events
+    loadFeaturedEvents();
+
     async function loadFeaturedEvents() {
-        const events = await fetchFeaturedEvents();
-        renderFeaturedEvents(events);
+        try {
+            const response = await utils.api.fetch(`${utils.api.endpoints.events}?pageNumber=1&pageSize=3`);
+            console.log('API Response:', response); // Debug log
+
+            // Check if response has the expected structure
+            if (!response || !response.events || !Array.isArray(response.events)) {
+                throw new Error('Invalid response format from API');
+            }
+
+            renderFeaturedEvents(response.events);
+        } catch (error) {
+            console.error('Error loading featured events:', error);
+            const featuredEventsContainer = document.getElementById('featuredEvents');
+            if (featuredEventsContainer) {
+                featuredEventsContainer.innerHTML = `
+                    <div class="error-message">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <p>Failed to load featured events. Please try again later.</p>
+                    </div>
+                `;
+            }
+        }
     }
 
-    // Initialize the page
-    loadFeaturedEvents();
+    function renderFeaturedEvents(events) {
+        const featuredEventsContainer = document.getElementById('featuredEvents');
+        if (!featuredEventsContainer) return;
+
+        if (!events || events.length === 0) {
+            featuredEventsContainer.innerHTML = `
+                <div class="no-events">
+                    <i class="fas fa-calendar-times"></i>
+                    <p>No featured events available at the moment.</p>
+                </div>
+            `;
+            return;
+        }
+
+        featuredEventsContainer.innerHTML = events.map(event => createEventCard(event)).join('');
+    }
+
+    function createEventCard(event) {
+        const formattedDate = utils.dateUtils.formatDate(event.date);
+        const formattedTime = utils.dateUtils.formatTime(event.date);
+
+        return `
+            <div class="event-card">
+                <div class="event-image">
+                    <img src="${event.imageUrl || 'https://via.placeholder.com/300x200?text=Event+Image'}" alt="${event.name}">
+                </div>
+                <div class="event-details">
+                    <h4>${event.name}</h4>
+                    <div class="event-info">
+                        <p><i class="fas fa-calendar"></i> ${formattedDate}</p>
+                        <p><i class="fas fa-clock"></i> ${formattedTime}</p>
+                        <p><i class="fas fa-map-marker-alt"></i> ${event.venue}</p>
+                        <p><i class="fas fa-tag"></i> ${event.category}</p>
+                    </div>
+                    <button onclick="window.location.href='user-event-details.html?id=${event.id}'">
+                        View Details
+                    </button>
+                </div>
+            </div>
+        `;
+    }
 }); 

@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Function to fetch event details
     async function fetchEventDetails() {
         try {
-            const response = await fetch(`https://localhost:7107/api/event/${eventId}`, {
+            const response = await fetch(`https://ahmedhamdy-areeb-api.runasp.net/api/event/${eventId}`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -228,7 +228,7 @@ document.addEventListener('DOMContentLoaded', function() {
         };
 
         try {
-            const response = await fetch(`https://localhost:7107/api/event/${eventId}`, {
+            const response = await fetch(`https://ahmedhamdy-areeb-api.runasp.net/api/event/${eventId}`, {
                 method: 'PUT',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -261,7 +261,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         try {
-            const response = await fetch(`https://localhost:7107/api/event/${eventId}`, {
+            const response = await fetch(`https://ahmedhamdy-areeb-api.runasp.net/api/event/${eventId}`, {
                 method: 'DELETE',
                 headers: {
                     'Authorization': `Bearer ${token}`,

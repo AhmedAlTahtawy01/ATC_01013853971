@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Function to fetch total events count
     async function fetchTotalEvents() {
         try {
-            const response = await fetch('https://localhost:7107/api/event/count', {
+            const response = await fetch('https://ahmedhamdy-areeb-api.runasp.net/api/event/count', {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Function to fetch total users count
     async function fetchTotalUsers() {
         try {
-            const response = await fetch('https://localhost:7107/api/user/count', {
+            const response = await fetch('https://ahmedhamdy-areeb-api.runasp.net/api/user/count', {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Function to fetch total bookings count
     async function fetchTotalBookings() {
         try {
-            const response = await fetch('https://localhost:7107/api/booking/count', {
+            const response = await fetch('https://ahmedhamdy-areeb-api.runasp.net/api/booking/count', {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${token}`,

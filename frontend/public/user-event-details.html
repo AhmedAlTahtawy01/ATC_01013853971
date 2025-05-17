@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Details - ATC System</title>
+    <link rel="stylesheet" href="../src/css/user-event-details.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>ATC System</h1>
+        </div>
+        <nav>
+            <a href="user-home.html">Home</a>
+            <a href="user-events.html" class="active">Events</a>
+            <a href="user-bookings.html">My Bookings</a>
+        </nav>
+        <div class="user-menu">
+            <span id="userName">Loading...</span>
+            <button id="logoutBtn" class="logout-btn">Logout</button>
+        </div>
+    </header>
+
+    <main class="event-details-container">
+        <div class="event-header">
+            <div class="event-image">
+                <img id="eventImage" src="" alt="Event Image">
+            </div>
+            <div class="event-info">
+                <h1 id="eventTitle">Loading...</h1>
+                <div class="event-meta">
+                    <p><i class="fas fa-calendar"></i> <span id="eventDate">Loading...</span></p>
+                    <p><i class="fas fa-clock"></i> <span id="eventTime">Loading...</span></p>
+                    <p><i class="fas fa-map-marker-alt"></i> <span id="eventLocation">Loading...</span></p>
+                    <p><i class="fas fa-tag"></i> <span id="eventCategory">Loading...</span></p>
+                </div>
+                <div class="event-price">
+                    <h3>Price: <span id="eventPrice">Loading...</span></h3>
+                </div>
+                <button id="bookNowBtn" class="book-now-btn">Book Now</button>
+            </div>
+        </div>
+
+        <div class="event-content">
+            <section class="event-description">
+                <h2>About This Event</h2>
+                <p id="eventDescription">Loading...</p>
+            </section>
+
+            <section class="event-details">
+                <h2>Event Details</h2>
+                <div class="details-grid">
+                    <div class="detail-item">
+                        <i class="fas fa-clock"></i>
+                        <h3>Duration</h3>
+                        <p id="eventDuration">Loading...</p>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-language"></i>
+                        <h3>Language</h3>
+                        <p id="eventLanguage">Loading...</p>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-ticket-alt"></i>
+                        <h3>Available Tickets</h3>
+                        <p id="availableTickets">Loading...</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="event-location">
+                <h2>Location</h2>
+                <div id="map" class="map-container">
+                    <!-- Map will be loaded here -->
+                </div>
+                <p id="locationDetails" class="location-details">Loading...</p>
+            </section>
+        </div>
+    </main>
+
+    <!-- Booking Modal -->
+    <div id="bookingModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Book Event</h2>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="bookingForm">
+                    <div class="booking-confirmation">
+                        <p>You are about to book 1 ticket for:</p>
+                        <h3 id="modalEventName"></h3>
+                        <p class="event-date" id="modalEventDate"></p>
+                        <p class="event-price" id="modalEventPrice"></p>
+                    </div>
+                    <button type="submit" class="submit-btn">Confirm Booking</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="modal">
+        <div class="modal-content success-content">
+            <div class="success-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h2>Booking Successful!</h2>
+            <p>Your event has been booked successfully.</p>
+            <div class="success-actions">
+                <button onclick="window.location.href='user-bookings.html'" class="view-bookings-btn">View My Bookings</button>
+                <button onclick="window.location.href='user-events.html'" class="browse-events-btn">Browse More Events</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>About Us</h4>
+                <p>ATC System is your premier platform for discovering and booking amazing events.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <a href="user-home.html">Home</a>
+                <a href="user-events.html">Events</a>
+                <a href="user-bookings.html">My Bookings</a>
+            </div>
+            <div class="footer-section">
+                <h4>Contact Us</h4>
+                <p><i class="fas fa-envelope"></i> support@atcsystem.com</p>
+                <p><i class="fas fa-phone"></i> +1 234 567 890</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 ATC System. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../src/js/utils.js"></script>
+    <script src="../src/js/user-event-details.js"></script>
+</body>
+</html> 

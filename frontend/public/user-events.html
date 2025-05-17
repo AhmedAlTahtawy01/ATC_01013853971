@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Events - Event Booking</title>
+    <link rel="stylesheet" href="../src/css/user-events.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>Event Booking</h1>
+        </div>
+        <nav>
+            <a href="user-home.html">Home</a>
+            <a href="user-events.html" class="active">Events</a>
+            <a href="my-bookings.html">My Bookings</a>
+            <div class="user-menu">
+                <span id="userName">Loading...</span>
+                <button id="logoutBtn" class="logout-btn">Logout</button>
+            </div>
+        </nav>
+    </header>
+
+    <section class="events-section">
+        <div class="events-header">
+            <h2>All Events</h2>
+            <div class="search-filter">
+                <input type="text" id="searchInput" placeholder="Search events...">
+                <select id="categoryFilter">
+                    <option value="">All Categories</option>
+                    <option value="Music">Music</option>
+                    <option value="Theater">Theater</option>
+                    <option value="Food">Food & Drink</option>
+                    <option value="Education">Education</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="event-list" id="eventList">
+            <!-- Events will be dynamically added here -->
+        </div>
+
+        <div class="pagination" id="pagination">
+            <!-- Pagination will be dynamically added here -->
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>About Us</h4>
+                <p>Your premier platform for discovering and booking events.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <a href="user-events.html">Events</a>
+                <a href="my-bookings.html">My Bookings</a>
+                <a href="#">Contact Us</a>
+            </div>
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <p>Email: support@eventbooking.com</p>
+                <p>Phone: (123) 456-7890</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Event Booking. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../src/js/utils.js"></script>
+    <script src="../src/js/user-events.js"></script>
+</body>
+</html> 
