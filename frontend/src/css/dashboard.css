@@ -1,3 +1,40 @@
+/* Dark Mode Variables */
+:root {
+    --bg-color: #f5f7fa;
+    --text-color: #333;
+    --card-bg: white;
+    --border-color: #eee;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --hover-bg: #f5f5f5;
+    --modal-bg: #fefefe;
+    --input-bg: white;
+    --input-border: #ddd;
+    --sidebar-bg: #2c3e50;
+    --sidebar-text: #ecf0f1;
+    --sidebar-hover: #34495e;
+    --sidebar-active: #3498db;
+    --logout-bg: #e74c3c;
+    --logout-hover: #c0392b;
+}
+
+[data-theme="dark"] {
+    --bg-color: #1a1a1a;
+    --text-color: #e0e0e0;
+    --card-bg: #2d2d2d;
+    --border-color: #404040;
+    --shadow-color: rgba(0, 0, 0, 0.3);
+    --hover-bg: #3d3d3d;
+    --modal-bg: #2d2d2d;
+    --input-bg: #333;
+    --input-border: #404040;
+    --sidebar-bg: #1a1a1a;
+    --sidebar-text: #e0e0e0;
+    --sidebar-hover: #2d2d2d;
+    --sidebar-active: #3498db;
+    --logout-bg: #c0392b;
+    --logout-hover: #a93226;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -6,8 +43,10 @@
 }
 
 body {
-    background-color: #f5f7fa;
+    background-color: var(--bg-color);
+    color: var(--text-color);
     min-height: 100vh;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 .dashboard-container {
@@ -18,8 +57,8 @@ body {
 /* Sidebar Styles */
 .sidebar {
     width: 250px;
-    background-color: #2c3e50;
-    color: white;
+    background-color: var(--sidebar-bg);
+    color: var(--sidebar-text);
     padding: 20px;
     display: flex;
     flex-direction: column;
@@ -28,7 +67,7 @@ body {
 .logo h2 {
     margin-bottom: 30px;
     text-align: center;
-    color: #ecf0f1;
+    color: var(--sidebar-text);
 }
 
 .nav-links {
@@ -41,7 +80,7 @@ body {
 }
 
 .nav-links a {
-    color: #ecf0f1;
+    color: var(--sidebar-text);
     text-decoration: none;
     display: flex;
     align-items: center;
@@ -50,12 +89,18 @@ body {
     transition: background-color 0.3s;
 }
 
+.nav-links a i {
+    width: 20px;
+    margin-right: 10px;
+    font-size: 1.1em;
+}
+
 .nav-links a:hover {
-    background-color: #34495e;
+    background-color: var(--sidebar-hover);
 }
 
 .nav-links li.active a {
-    background-color: #3498db;
+    background-color: var(--sidebar-active);
 }
 
 .icon {
@@ -81,13 +126,14 @@ body {
 .user-role {
     display: block;
     font-size: 0.9em;
-    color: #bdc3c7;
+    color: var(--sidebar-text);
+    opacity: 0.7;
 }
 
 .logout-btn {
     width: 100%;
     padding: 10px;
-    background-color: #e74c3c;
+    background-color: var(--logout-bg);
     color: white;
     border: none;
     border-radius: 5px;
@@ -96,7 +142,7 @@ body {
 }
 
 .logout-btn:hover {
-    background-color: #c0392b;
+    background-color: var(--logout-hover);
 }
 
 /* Main Content Styles */
@@ -113,7 +159,8 @@ body {
 }
 
 .date-time {
-    color: #7f8c8d;
+    color: var(--text-color);
+    opacity: 0.7;
 }
 
 .dashboard-content {
@@ -129,14 +176,15 @@ body {
 }
 
 .stat-card {
-    background-color: white;
+    background-color: var(--card-bg);
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 10px var(--shadow-color);
 }
 
 .stat-card h3 {
-    color: #7f8c8d;
+    color: var(--text-color);
+    opacity: 0.7;
     margin-bottom: 10px;
     font-size: 1em;
 }
@@ -144,23 +192,24 @@ body {
 .stat-number {
     font-size: 2em;
     font-weight: 600;
-    color: #2c3e50;
+    color: var(--text-color);
 }
 
 .recent-activity {
-    background-color: white;
+    background-color: var(--card-bg);
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 10px var(--shadow-color);
 }
 
 .recent-activity h2 {
     margin-bottom: 20px;
-    color: #2c3e50;
+    color: var(--text-color);
 }
 
 .no-activity {
-    color: #7f8c8d;
+    color: var(--text-color);
+    opacity: 0.7;
     text-align: center;
     padding: 20px;
 }

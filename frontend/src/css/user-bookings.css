@@ -5,11 +5,46 @@
     box-sizing: border-box;
 }
 
+:root {
+    --bg-primary: #f5f5f5;
+    --bg-secondary: #ffffff;
+    --text-primary: #333;
+    --text-secondary: #666;
+    --accent-color: #751f08ec;
+    --accent-hover: #5a1806;
+    --border-color: #ddd;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --card-bg: #ffffff;
+    --input-bg: #ffffff;
+    --input-border: #ddd;
+    --button-text: #ffffff;
+    --success-color: #4CAF50;
+    --error-color: #dc3545;
+}
+
+[data-theme="dark"] {
+    --bg-primary: #1a1a1a;
+    --bg-secondary: #2d2d2d;
+    --text-primary: #ffffff;
+    --text-secondary: #e0e0e0;
+    --accent-color: #ff6b6b;
+    --accent-hover: #ff5252;
+    --border-color: #404040;
+    --shadow-color: rgba(0, 0, 0, 0.3);
+    --card-bg: #2d2d2d;
+    --input-bg: #2d2d2d;
+    --input-border: #404040;
+    --button-text: #ffffff;
+    --success-color: #66bb6a;
+    --error-color: #ef5350;
+}
+
 body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
-    color: #333;
-    background-color: #f5f5f5;
+    color: var(--text-primary);
+    background-color: var(--bg-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Header styles */
@@ -87,15 +122,16 @@ nav a:hover, nav a.active {
 
 .bookings-header h2 {
     font-size: 28px;
-    color: #333;
+    color: var(--text-primary);
 }
 
 .bookings-filter select {
     padding: 8px 16px;
-    border: 1px solid #ddd;
+    border: 1px solid var(--input-border);
     border-radius: 4px;
     font-size: 16px;
-    background-color: white;
+    background-color: var(--input-bg);
+    color: var(--text-primary);
     cursor: pointer;
 }
 
@@ -106,10 +142,10 @@ nav a:hover, nav a.active {
 }
 
 .booking-card {
-    background: white;
+    background: var(--card-bg);
     border-radius: 10px;
     padding: 20px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 5px var(--shadow-color);
     display: grid;
     grid-template-columns: 1fr auto;
     gap: 20px;
@@ -133,7 +169,7 @@ nav a:hover, nav a.active {
 
 .booking-title {
     font-size: 20px;
-    color: #333;
+    color: var(--text-primary);
     margin: 0;
 }
 
@@ -164,11 +200,11 @@ nav a:hover, nav a.active {
     display: flex;
     align-items: center;
     gap: 10px;
-    color: #666;
+    color: var(--text-secondary);
 }
 
 .detail-item i {
-    color: #751f08ec;
+    color: var(--accent-color);
     width: 20px;
 }
 
@@ -340,4 +376,27 @@ footer {
     .footer-content {
         grid-template-columns: 1fr;
     }
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+    background: transparent;
+    border: 1px solid var(--button-text);
+    color: var(--button-text);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.theme-toggle i {
+    font-size: 16px;
 } 

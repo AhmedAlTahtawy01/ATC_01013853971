@@ -5,11 +5,48 @@
     box-sizing: border-box;
 }
 
+:root {
+    --bg-primary: #f5f5f5;
+    --bg-secondary: #ffffff;
+    --text-primary: #333;
+    --text-secondary: #666;
+    --accent-color: #751f08ec;
+    --accent-hover: #5a1806;
+    --border-color: #ddd;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --card-bg: #ffffff;
+    --input-bg: #ffffff;
+    --input-border: #ddd;
+    --button-text: #ffffff;
+    --success-color: #4CAF50;
+    --error-color: #dc3545;
+    --hover-bg: #f0f0f0;
+}
+
+[data-theme="dark"] {
+    --bg-primary: #1a1a1a;
+    --bg-secondary: #2d2d2d;
+    --text-primary: #ffffff;
+    --text-secondary: #e0e0e0;
+    --accent-color: #ff6b6b;
+    --accent-hover: #ff5252;
+    --border-color: #404040;
+    --shadow-color: rgba(0, 0, 0, 0.3);
+    --card-bg: #2d2d2d;
+    --input-bg: #333;
+    --input-border: #404040;
+    --button-text: #ffffff;
+    --success-color: #66bb6a;
+    --error-color: #ef5350;
+    --hover-bg: #404040;
+}
+
 body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
-    color: #333;
-    background-color: #f5f5f5;
+    color: var(--text-primary);
+    background-color: var(--bg-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Header styles */
@@ -83,16 +120,17 @@ nav a:hover, nav a.active {
     grid-template-columns: 1fr 1fr;
     gap: 30px;
     margin-bottom: 40px;
-    background: white;
+    background: var(--card-bg);
     border-radius: 10px;
     overflow: hidden;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 5px var(--shadow-color);
 }
 
 .event-image {
     width: 100%;
     height: 400px;
     overflow: hidden;
+    background: var(--card-bg);
 }
 
 .event-image img {
@@ -103,12 +141,13 @@ nav a:hover, nav a.active {
 
 .event-info {
     padding: 30px;
+    background: var(--card-bg);
 }
 
 .event-info h1 {
     font-size: 32px;
     margin-bottom: 20px;
-    color: #333;
+    color: var(--text-primary);
 }
 
 .event-meta {
@@ -118,23 +157,29 @@ nav a:hover, nav a.active {
 .event-meta p {
     display: flex;
     align-items: center;
-    gap: 10px;
-    margin-bottom: 10px;
-    color: #666;
+    gap: 12px;
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    opacity: 0.9;
 }
 
 .event-meta i {
-    color: #751f08ec;
+    color: var(--accent-color);
     width: 20px;
+    opacity: 0.9;
 }
 
 .event-price {
-    margin-bottom: 30px;
+    background-color: var(--hover-bg);
+    padding: 20px;
+    border-radius: 8px;
+    margin: 20px 0;
 }
 
 .event-price h3 {
-    font-size: 24px;
-    color: #751f08ec;
+    font-size: 28px;
+    color: var(--accent-color);
+    margin: 0;
 }
 
 .book-now-btn {
@@ -155,10 +200,10 @@ nav a:hover, nav a.active {
 
 /* Event content */
 .event-content {
-    background: white;
+    background: var(--card-bg);
     border-radius: 10px;
     padding: 30px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 5px var(--shadow-color);
 }
 
 .event-description {
@@ -168,12 +213,13 @@ nav a:hover, nav a.active {
 .event-description h2 {
     font-size: 24px;
     margin-bottom: 20px;
-    color: #333;
+    color: var(--text-primary);
 }
 
 .event-description p {
-    color: #666;
+    color: var(--text-secondary);
     line-height: 1.8;
+    opacity: 0.9;
 }
 
 /* Event details grid */
@@ -187,24 +233,24 @@ nav a:hover, nav a.active {
 .detail-item {
     text-align: center;
     padding: 20px;
-    background: #f9f9f9;
+    background: var(--hover-bg);
     border-radius: 8px;
 }
 
 .detail-item i {
     font-size: 24px;
-    color: #751f08ec;
+    color: var(--accent-color);
     margin-bottom: 10px;
 }
 
 .detail-item h3 {
     font-size: 18px;
     margin-bottom: 10px;
-    color: #333;
+    color: var(--text-primary);
 }
 
 .detail-item p {
-    color: #666;
+    color: var(--text-secondary);
 }
 
 /* Location section */
@@ -215,20 +261,21 @@ nav a:hover, nav a.active {
 .event-location h2 {
     font-size: 24px;
     margin-bottom: 20px;
-    color: #333;
+    color: var(--text-primary);
 }
 
 .map-container {
     width: 100%;
     height: 300px;
-    background: #f0f0f0;
+    background: var(--hover-bg);
     border-radius: 8px;
     margin-bottom: 20px;
 }
 
 .location-details {
-    color: #666;
+    color: var(--text-secondary);
     line-height: 1.8;
+    opacity: 0.9;
 }
 
 /* Modal styles */
@@ -244,7 +291,7 @@ nav a:hover, nav a.active {
 }
 
 .modal-content {
-    background-color: white;
+    background-color: var(--card-bg);
     margin: 15% auto;
     padding: 20px;
     border-radius: 8px;
@@ -276,19 +323,19 @@ nav a:hover, nav a.active {
 
 .modal-header h2 {
     margin: 0;
-    color: #333;
+    color: var(--text-primary);
 }
 
 .close {
     font-size: 24px;
     font-weight: bold;
-    color: #666;
+    color: var(--text-secondary);
     cursor: pointer;
     transition: color 0.2s;
 }
 
 .close:hover {
-    color: #333;
+    color: var(--text-primary);
 }
 
 .booking-confirmation {
@@ -297,13 +344,15 @@ nav a:hover, nav a.active {
 }
 
 .booking-confirmation h3 {
-    color: #333;
+    color: var(--text-primary);
     margin: 10px 0;
+    opacity: 0.95;
 }
 
 .event-date, .event-price {
-    color: #666;
+    color: var(--text-secondary);
     margin: 5px 0;
+    opacity: 0.9;
 }
 
 .event-price {
@@ -340,18 +389,20 @@ nav a:hover, nav a.active {
 
 .success-icon {
     font-size: 64px;
-    color: #4CAF50;
+    color: var(--success-color);
     margin-bottom: 20px;
 }
 
 .success-content h2 {
-    color: #333;
+    color: var(--text-primary);
     margin-bottom: 10px;
+    opacity: 0.95;
 }
 
 .success-content p {
-    color: #666;
+    color: var(--text-secondary);
     margin-bottom: 30px;
+    opacity: 0.9;
 }
 
 .success-actions {
@@ -486,19 +537,22 @@ footer {
     align-items: center;
     justify-content: center;
     height: 100%;
-    background-color: #f8f8f8;
+    background-color: var(--hover-bg);
     border-radius: 8px;
-    color: #666;
+    color: var(--text-secondary);
+    opacity: 0.9;
 }
 
 .map-placeholder i {
     font-size: 48px;
-    color: #751f08ec;
+    color: var(--accent-color);
     margin-bottom: 15px;
+    opacity: 0.9;
 }
 
 .map-placeholder p {
     font-size: 1.1rem;
+    opacity: 0.9;
 }
 
 /* Success and Error Messages */
@@ -511,13 +565,13 @@ footer {
 }
 
 .success-message {
-    background-color: #e8f5e9;
-    color: #2e7d32;
+    background-color: rgba(46, 125, 50, 0.1);
+    color: var(--success-color);
 }
 
 .error-message {
-    background-color: #ffebee;
-    color: #c62828;
+    background-color: rgba(198, 40, 40, 0.1);
+    color: var(--error-color);
 }
 
 .success-message i,
@@ -530,6 +584,7 @@ footer {
 .error-message p {
     font-size: 1.1rem;
     margin: 0;
+    color: inherit;
 }
 
 /* Event details improvements */
@@ -550,19 +605,21 @@ footer {
     display: flex;
     align-items: center;
     gap: 12px;
-    color: #555;
+    color: var(--text-secondary);
     font-size: 1.1rem;
+    opacity: 0.9;
 }
 
 .event-meta i {
-    color: #751f08ec;
+    color: var(--accent-color);
     width: 24px;
     text-align: center;
     font-size: 1.2rem;
+    opacity: 0.9;
 }
 
 .event-price {
-    background-color: #f8f8f8;
+    background-color: var(--hover-bg);
     padding: 20px;
     border-radius: 8px;
     margin: 20px 0;
@@ -570,7 +627,7 @@ footer {
 
 .event-price h3 {
     font-size: 28px;
-    color: #751f08ec;
+    color: var(--accent-color);
     margin: 0;
 }
 
@@ -611,4 +668,27 @@ footer {
         padding: 12px;
         font-size: 16px;
     }
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+    background: transparent;
+    border: 1px solid var(--button-text);
+    color: var(--button-text);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.theme-toggle i {
+    font-size: 16px;
 } 
