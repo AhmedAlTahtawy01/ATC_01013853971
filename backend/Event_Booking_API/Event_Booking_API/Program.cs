@@ -28,11 +28,23 @@ builder.Services.AddSwaggerGen(options =>
 // Connection Settings
 builder.Services.AddScoped<ConnectionSettings>();
 
+// Shared
+builder.Services.AddScoped<Shared>();
 
 // User Repo
 builder.Services.AddScoped<UserRepo>();
 // User Service
 builder.Services.AddScoped<UserService>();
+
+// Role Repo
+builder.Services.AddScoped<RoleRepo>();
+// Role Service
+builder.Services.AddScoped<RoleService>();
+
+// Event Repo
+builder.Services.AddScoped<EventRepo>();
+// Event Service
+builder.Services.AddScoped<EventService>();
 
 // Register controllers with different namespace
 builder.Services.AddControllers()
