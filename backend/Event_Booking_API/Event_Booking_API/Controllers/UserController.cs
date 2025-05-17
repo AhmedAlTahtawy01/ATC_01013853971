@@ -132,6 +132,24 @@ namespace EventBooking.Controllers
             }
         }
 
+        [Authorize(Roles = "1")]
+        [HttpGet("count")]
+        public async Task<IActionResult> GetUserCount()
+        {
+            try
+            {
+                _logger.LogInformation("Retrieving total user count");
+                var count = await _userService.GetUserCountAsync();
+
+                return Ok(new { message = "User count retrieved successfully", count });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error retrieving user count");
+                return StatusCode(500, new { message = "Internal server error" });
+            }
+        }
+
         [HttpGet("{userId}")]
         public async Task<IActionResult> GetById([FromRoute] int userId)
         {

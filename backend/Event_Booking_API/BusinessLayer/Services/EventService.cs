@@ -94,6 +94,21 @@ namespace BusinessLogic.Services
             }
         }
 
+        // Get total count of events
+        public async Task<int> GetEventCountAsync()
+        {
+            try
+            {
+                _logger.LogInformation("Retrieving total event count");
+                return await _eventRepo.CountEventsAsync();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error occurred while retrieving event count");
+                throw;
+            }
+        }
+
         // Get all events with pagination
         public async Task<List<Event>> GetAllEventsAsync(int pageNumber = 1, int pageSize = 10)
         {

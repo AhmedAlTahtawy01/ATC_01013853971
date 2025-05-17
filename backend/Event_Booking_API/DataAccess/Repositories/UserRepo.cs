@@ -100,6 +100,38 @@ namespace DataAccess.Repositories
             }
         }
 
+        // Count all users in the system
+        public async Task<int> CountUsersAsync()
+        {
+            const string query = "SELECT COUNT(*) FROM Users";
+
+            try
+            {
+                _logger.LogInformation("Counting all users in the system");
+
+
+                var usersCount = await _db.ExecuteQueryAsync(query, async cmd =>
+                {
+                    return await cmd.ExecuteScalarAsync();
+                });
+
+                if (usersCount != null)
+                {
+                    _logger.LogInformation("Total users in the system: {Count}", usersCount);
+                    return Convert.ToInt32(usersCount);
+                }
+
+                _logger.LogWarning("No users found in the system");
+                return 0;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error occurred while counting all users in the system");
+                throw;
+            }
+        }
+
+
         // Get user by column (Helper method)
         private async Task<User?> GetByColumnAsync(string column, string value)
         {

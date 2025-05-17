@@ -117,6 +117,21 @@ namespace BusinessLogic.Services
             }
         }
 
+        // Get total count of bookings
+        public async Task<int> GetBookingCountAsync()
+        {
+            try
+            {
+                _logger.LogInformation("Retrieving total booking count");
+                return await _bookingRepo.CountBookingsAsync();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error occurred while retrieving booking count");
+                throw;
+            }
+        }
+
         // Get booking by ID
         public async Task<Booking?> GetBookingByIdAsync(int bookingId)
         {

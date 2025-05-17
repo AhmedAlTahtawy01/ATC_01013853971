@@ -97,6 +97,36 @@ namespace DataAccess.Repositories
             }
         }
 
+        // Count all events in the system
+        public async Task<int> CountEventsAsync()
+        {
+            const string query = "SELECT COUNT(*) FROM Events";
+
+            try
+            {
+                _logger.LogInformation("Counting all events in the system");
+
+                var eventsCount = await _db.ExecuteQueryAsync(query, async cmd =>
+                {
+                    return await cmd.ExecuteScalarAsync();
+                });
+
+                if (eventsCount != null)
+                {
+                    _logger.LogInformation("Total events in the system: {Count}", eventsCount);
+                    return Convert.ToInt32(eventsCount);
+                }
+
+                _logger.LogWarning("No events found in the system");
+                return 0;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error occurred while counting all events in the system");
+                throw;
+            }
+        }
+
         // Get event by ID
         public async Task<Event?> GetEventByIdAsync(int eventId)
         {

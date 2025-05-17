@@ -158,6 +158,21 @@ namespace BusinessLogic.Services
             }
         }
 
+        // Get total count of users
+        public async Task<int> GetUserCountAsync()
+        {
+            try
+            {
+                _logger.LogInformation("Retrieving total user count");
+                return await _userRepo.CountUsersAsync();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error occurred while retrieving user count");
+                throw;
+            }
+        }
+
         // Get user by ID
         public async Task<User?> GetByIdAsync(int userId)
         {

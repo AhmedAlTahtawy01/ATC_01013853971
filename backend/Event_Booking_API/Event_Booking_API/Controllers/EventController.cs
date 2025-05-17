@@ -82,6 +82,23 @@ namespace EventBooking.Controllers
             }
         }
 
+        [Authorize(Roles = "1")]
+        [HttpGet("count")]
+        public async Task<IActionResult> GetEventCount()
+        {
+            try
+            {
+                _logger.LogInformation("Retrieving total event count");
+                var count = await _eventService.GetEventCountAsync();
+                return Ok(new { message = "Event count retrieved successfully", count });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error retrieving event count");
+                return StatusCode(500, new { message = "Internal server error" });
+            }
+        }
+
         [HttpGet("{eventId}")]
         public async Task<IActionResult> GetById([FromRoute] int eventId)
         {

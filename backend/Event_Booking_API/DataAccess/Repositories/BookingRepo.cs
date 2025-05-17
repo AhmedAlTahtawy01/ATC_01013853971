@@ -91,6 +91,36 @@ namespace DataAccess.Repositories
             }
         }
 
+        // Count all bookings in the system
+        public async Task<int> CountBookingsAsync()
+        {
+            const string query = "SELECT COUNT(*) FROM Bookings";
+
+            try
+            {
+                _logger.LogInformation("Counting all bookings in the system");
+
+                var bookingsCount = await _db.ExecuteQueryAsync(query, async cmd =>
+                {
+                    return await cmd.ExecuteScalarAsync();
+                });
+
+                if (bookingsCount != null)
+                {
+                    _logger.LogInformation("Total bookings in the system: {Count}", bookingsCount);
+                    return Convert.ToInt32(bookingsCount);
+                }
+
+                _logger.LogWarning("No bookings found in the system");
+                return 0;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error occurred while counting all bookings in the system");
+                throw;
+            }
+        }
+
         // Get booking by ID
         public async Task<Booking?> GetBookingByIdAsync(int bookingId)
         {
