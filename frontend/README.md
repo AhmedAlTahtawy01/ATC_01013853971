@@ -31,7 +31,7 @@ frontend/
 
 1. Using Visual Studio Code:
    - Install the "Live Server" extension
-   - Right-click on `index.html` and select "Open with Live Server"
+   - Right-click on `login.html` and select "Open with Live Server"
 
 ## Features
 
