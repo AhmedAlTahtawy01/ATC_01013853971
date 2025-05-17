@@ -13,13 +13,15 @@ namespace BusinessLogic.Helpers
         private readonly ILogger<Shared> _logger;
         private readonly UserRepo _userRepo;
         private readonly EventRepo _eventRepo;
+        private readonly TagRepo _tagRepo;
 
 
-        public Shared(ILogger<Shared> logger, UserRepo userRepo, EventRepo eventRepo)
+        public Shared(ILogger<Shared> logger, UserRepo userRepo, EventRepo eventRepo, TagRepo tagRepo)
         {
             _logger = logger;
             _userRepo = userRepo;
             _eventRepo = eventRepo;
+            _tagRepo = tagRepo;
         }
 
         public async Task<bool> IsUserExists(int userId)
@@ -41,6 +43,18 @@ namespace BusinessLogic.Helpers
             if (existingEvent == null)
             {
                 _logger.LogWarning("Event not found with ID: {EventId}", eventId);
+                return false;
+            }
+            return true;
+        }
+
+        public async Task<bool> IsTagExists(int tagId)
+        {
+            _logger.LogInformation("Checking if tag exists with ID: {TagId}", tagId);
+            var existingTag = await _tagRepo.GetTagByIdAsync(tagId);
+            if (existingTag == null)
+            {
+                _logger.LogWarning("Tag not found with ID: {TagId}", tagId);
                 return false;
             }
             return true;

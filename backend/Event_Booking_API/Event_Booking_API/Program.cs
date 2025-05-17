@@ -56,6 +56,11 @@ builder.Services.AddScoped<TagRepo>();
 // Tag Service
 builder.Services.AddScoped<TagService>();
 
+// EventTag Repo
+builder.Services.AddScoped<EventTagRepo>();
+// EventTag Service
+builder.Services.AddScoped<EventTagService>();
+
 // Register controllers with different namespace
 builder.Services.AddControllers()
     .AddApplicationPart(typeof(Program).Assembly);
