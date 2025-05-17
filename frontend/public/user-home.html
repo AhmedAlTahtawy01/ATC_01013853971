@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Booking - Home</title>
+    <link rel="stylesheet" href="../src/css/user-home.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>Event Booking</h1>
+        </div>
+        <nav>
+            <a href="user-home.html" class="active">Home</a>
+            <a href="events.html">Events</a>
+            <a href="my-bookings.html">My Bookings</a>
+            <div class="user-menu">
+                <span id="userName">Loading...</span>
+                <button id="logoutBtn" class="logout-btn">Logout</button>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Welcome to Event Booking</h2>
+            <p>Discover and book amazing events, concerts, and gatherings in just a few clicks.</p>
+            <a href="events.html" class="cta-button">Browse Events</a>
+        </div>
+    </section>
+
+    <section class="featured-events">
+        <h3>Featured Events</h3>
+        <div class="event-list" id="featuredEvents">
+            <!-- Events will be dynamically added here -->
+        </div>
+    </section>
+
+    <section class="categories">
+        <h3>Event Categories</h3>
+        <div class="category-grid">
+            <div class="category-card">
+                <i class="fas fa-music"></i>
+                <h4>Music</h4>
+                <p>Concerts and live performances</p>
+            </div>
+            <div class="category-card">
+                <i class="fas fa-theater-masks"></i>
+                <h4>Theater</h4>
+                <p>Plays and dramatic performances</p>
+            </div>
+            <div class="category-card">
+                <i class="fas fa-utensils"></i>
+                <h4>Food & Drink</h4>
+                <p>Food festivals and tastings</p>
+            </div>
+            <div class="category-card">
+                <i class="fas fa-graduation-cap"></i>
+                <h4>Education</h4>
+                <p>Workshops and seminars</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>About Us</h4>
+                <p>Your premier platform for discovering and booking events.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <a href="events.html">Events</a>
+                <a href="my-bookings.html">My Bookings</a>
+                <a href="#">Contact Us</a>
+            </div>
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <p>Email: support@eventbooking.com</p>
+                <p>Phone: (123) 456-7890</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Event Booking. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../src/js/user-home.js"></script>
+</body>
+</html> 

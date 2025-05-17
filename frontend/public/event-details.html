@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Details - Event Booking</title>
+    <link rel="stylesheet" href="../src/css/dashboard.css">
+    <link rel="stylesheet" href="../src/css/event.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <nav class="sidebar">
+            <div class="logo">
+                <h2>Event Booking</h2>
+            </div>
+            <ul class="nav-links">
+                <li>
+                    <a href="dashboard.html"><span class="icon">🏠</span> Dashboard</a>
+                </li>
+                <li class="active">
+                    <a href="events.html"><span class="icon">📅</span> Events</a>
+                </li>
+                <li>
+                    <a href="users.html"><span class="icon">👥</span> Users</a>
+                </li>
+                <li>
+                    <a href="#"><span class="icon">⚙️</span> Settings</a>
+                </li>
+            </ul>
+            <div class="user-info">
+                <div class="user-details">
+                    <span class="user-name" id="userName">Loading...</span>
+                    <span class="user-role" id="userRole">Loading...</span>
+                </div>
+                <button id="logoutBtn" class="logout-btn">Logout</button>
+            </div>
+        </nav>
+
+        <main class="main-content">
+            <header class="top-bar">
+                <div class="back-button">
+                    <a href="events.html" class="back-link">
+                        <i class="fas fa-arrow-left"></i> Back to Events
+                    </a>
+                </div>
+                <div class="date-time" id="dateTime">Loading...</div>
+            </header>
+
+            <div class="event-details-container">
+                <div class="event-details-header">
+                    <h1 id="eventName">Loading...</h1>
+                    <span id="eventStatus" class="event-status">Loading...</span>
+                </div>
+
+                <div class="event-details-content">
+                    <div class="event-details-main">
+                        <div class="event-image-container">
+                            <img id="eventImage" src="" alt="Event Image" class="event-image">
+                        </div>
+                        <div class="event-info">
+                            <div class="info-group">
+                                <h3>Description</h3>
+                                <p id="eventDescription">Loading...</p>
+                            </div>
+                            <div class="info-group">
+                                <h3>Category</h3>
+                                <p id="eventCategory">Loading...</p>
+                            </div>
+                            <div class="info-group">
+                                <h3>Venue</h3>
+                                <p id="eventVenue">Loading...</p>
+                            </div>
+                            <div class="info-group">
+                                <h3>Date & Time</h3>
+                                <p id="eventDate">Loading...</p>
+                            </div>
+                            <div class="info-group">
+                                <h3>Price</h3>
+                                <p id="eventPrice">Loading...</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="event-actions">
+                        <button id="editEventBtn" class="edit-btn">
+                            <i class="fas fa-edit"></i> Edit Event
+                        </button>
+                        <button id="deleteEventBtn" class="delete-btn">
+                            <i class="fas fa-trash"></i> Delete Event
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Edit Event Modal -->
+    <div id="editEventModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Edit Event</h2>
+                <span class="close">&times;</span>
+            </div>
+            <form id="editEventForm">
+                <input type="hidden" id="editEventId">
+                <div class="form-group">
+                    <label for="editEventName">Event Name</label>
+                    <input type="text" id="editEventName" required>
+                </div>
+                <div class="form-group">
+                    <label for="editEventDescription">Description</label>
+                    <textarea id="editEventDescription" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="editEventCategory">Category</label>
+                    <select id="editEventCategory" required>
+                        <option value="">Select a category</option>
+                        <option value="Conference">Conference</option>
+                        <option value="Workshop">Workshop</option>
+                        <option value="Seminar">Seminar</option>
+                        <option value="Training">Training</option>
+                        <option value="Networking">Networking</option>
+                        <option value="Exhibition">Exhibition</option>
+                        <option value="Concert">Concert</option>
+                        <option value="Sports">Sports</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="editEventVenue">Venue</label>
+                    <select id="editEventVenue" required>
+                        <option value="">Select a venue</option>
+                        <option value="Cairo">Cairo</option>
+                        <option value="Alexandria">Alexandria</option>
+                        <option value="Giza">Giza</option>
+                        <option value="Sharm El Sheikh">Sharm El Sheikh</option>
+                        <option value="Hurghada">Hurghada</option>
+                        <option value="Luxor">Luxor</option>
+                        <option value="Aswan">Aswan</option>
+                        <option value="Port Said">Port Said</option>
+                        <option value="Suez">Suez</option>
+                        <option value="Mansoura">Mansoura</option>
+                        <option value="Tanta">Tanta</option>
+                        <option value="Ismailia">Ismailia</option>
+                        <option value="Assiut">Assiut</option>
+                        <option value="Zagazig">Zagazig</option>
+                        <option value="Damietta">Damietta</option>
+                        <option value="Sohag">Sohag</option>
+                        <option value="Minya">Minya</option>
+                        <option value="Beni Suef">Beni Suef</option>
+                        <option value="Qena">Qena</option>
+                        <option value="Sinai">Sinai</option>
+                        <option value="Matrouh">Matrouh</option>
+                        <option value="Red Sea">Red Sea</option>
+                        <option value="New Valley">New Valley</option>
+                        <option value="North Sinai">North Sinai</option>
+                        <option value="South Sinai">South Sinai</option>
+                        <option value="Kafr El Sheikh">Kafr El Sheikh</option>
+                        <option value="Gharbia">Gharbia</option>
+                        <option value="Monufia">Monufia</option>
+                        <option value="Beheira">Beheira</option>
+                        <option value="Sharqia">Sharqia</option>
+                        <option value="Dakahlia">Dakahlia</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="editEventDate">Date & Time</label>
+                    <input type="datetime-local" id="editEventDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="editEventPrice">Price</label>
+                    <input type="number" id="editEventPrice" step="0.01" min="0" required>
+                </div>
+                <div class="form-group">
+                    <label for="editEventImageUrl">Image URL</label>
+                    <input type="url" id="editEventImageUrl">
+                </div>
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="editEventIsActive">
+                        Active
+                    </label>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="cancel-btn">Cancel</button>
+                    <button type="submit" class="submit-btn">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../src/js/event-details.js"></script>
+</body>
+</html> 
